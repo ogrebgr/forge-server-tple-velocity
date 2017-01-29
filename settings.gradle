@@ -1,0 +1,6 @@
+rootProject.name = 'velocity'
+
+include ':forge-server'
+project(':forge-server').projectDir=new File("$settingsDir/../forge-server")
+
+
