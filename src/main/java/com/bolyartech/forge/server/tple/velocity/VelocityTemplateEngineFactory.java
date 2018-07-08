@@ -10,12 +10,12 @@ import java.util.Properties;
 
 
 public class VelocityTemplateEngineFactory implements TemplateEngineFactory {
-    private final VelocityEngine mVelocityEngine;
-    private final String mTemplatePathPrefix;
+    private final VelocityEngine velocityEngine;
+    private final String templatePathPrefix;
 
 
     public VelocityTemplateEngineFactory(String templatePathPrefix, Map<String, String> additionalSettings) {
-        mVelocityEngine = new VelocityEngine();
+        velocityEngine = new VelocityEngine();
         Properties properties = new Properties();
         properties.setProperty("resource.loader", "class");
         properties.setProperty(
@@ -26,9 +26,9 @@ public class VelocityTemplateEngineFactory implements TemplateEngineFactory {
             properties.setProperty(key, additionalSettings.get(key));
         }
 
-        mVelocityEngine.init(properties);
+        velocityEngine.init(properties);
 
-        mTemplatePathPrefix = templatePathPrefix;
+        this.templatePathPrefix = templatePathPrefix;
     }
 
 
@@ -39,6 +39,6 @@ public class VelocityTemplateEngineFactory implements TemplateEngineFactory {
 
     @Override
     public TemplateEngine createNew() {
-        return new VelocityTemplateEngine(mVelocityEngine, mTemplatePathPrefix);
+        return new VelocityTemplateEngine(velocityEngine, templatePathPrefix);
     }
 }

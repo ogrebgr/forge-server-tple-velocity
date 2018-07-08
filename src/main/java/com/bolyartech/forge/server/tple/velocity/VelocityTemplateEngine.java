@@ -6,33 +6,32 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
 import java.io.StringWriter;
-import java.util.Map;
 
 
 public class VelocityTemplateEngine implements TemplateEngine {
-    private final VelocityEngine mVelocityEngine;
-    private final VelocityContext mVelocityContext;
-    private final String mTemplatePathPrefix;
+    private final VelocityEngine velocityEngine;
+    private final VelocityContext velocityContext;
+    private final String templatePathPrefix;
 
 
     public VelocityTemplateEngine(VelocityEngine velocityEngine, String templatePathPrefix) {
-        mVelocityEngine = velocityEngine;
-        mVelocityContext = new VelocityContext();
-        mTemplatePathPrefix = templatePathPrefix;
+        this.velocityEngine = velocityEngine;
+        velocityContext = new VelocityContext();
+        this.templatePathPrefix = templatePathPrefix;
     }
 
 
     @Override
     public void assign(String varName, Object object) {
-        mVelocityContext.put(varName, object);
+        velocityContext.put(varName, object);
     }
 
 
     @Override
     public String render(String templateName) {
         StringWriter sw = new StringWriter();
-        Template t = mVelocityEngine.getTemplate(mTemplatePathPrefix + templateName);
-        t.merge(mVelocityContext, sw);
+        Template t = velocityEngine.getTemplate(templatePathPrefix + templateName);
+        t.merge(velocityContext, sw);
         return sw.toString();
     }
 }
