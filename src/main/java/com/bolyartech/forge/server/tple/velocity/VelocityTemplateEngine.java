@@ -30,7 +30,7 @@ public class VelocityTemplateEngine implements TemplateEngine {
     @Override
     public String render(String templateName) {
         StringWriter sw = new StringWriter();
-        Template t = velocityEngine.getTemplate(templatePathPrefix + templateName);
+        Template t = velocityEngine.getTemplate(templatePathPrefix + templateName, "UTF-8");
         t.merge(velocityContext, sw);
         return sw.toString();
     }
